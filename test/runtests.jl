@@ -1,5 +1,4 @@
 using QDXML
 using Base.Test
 
-# write your own tests here
-@test 1 == 1
+@test XML("<n><k a=b c=d g=\" h i\">g</k><y / ></n>s")["k"].attrs["g"] == " h i"
