@@ -40,7 +40,7 @@ function Document(l)
                 unreachable
             end
             for i in e.attrs
-                if first(i.value) == last(i.value) == '"'
+                if length(i.value) ≥ 2 && first(i.value) == last(i.value) == '"'
                     t.attrs[i.name] = i.value[2:end-1]
                 else
                     t.attrs[i.name] = i.value

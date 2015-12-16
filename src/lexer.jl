@@ -15,7 +15,7 @@ spc = Drop(Star(Space()))
 
 
 doctype = E"<?" + p"[^?]*" + E"?>" |> x->Tag(0, x)
-attrnq = p"[^ =<>/?]+" + E"=" + p"[^ =<>/?]+"
+attrnq = p"[^ =<>/?]+" + E"=" + p"[^ =<>/?\"]+"
 attrq = p"[^ =<>/?]+" + E"=" + p"\"[^\"]*\""
 attre =  p"[^ =<>/?]+" + E" "
 attr = attrnq | attrq | attre > Attr
