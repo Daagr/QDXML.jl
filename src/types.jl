@@ -1,15 +1,13 @@
 type Elem <: XML
     name::AbstractString
     attrs::Dict{AbstractString, AbstractString}
-    elems::Vector{XML}
+    elems::Vector
     Elem() = new("", Dict(), [])
 end
-type Text <: XML
-    data::AbstractString
-end
+
 type Document <: XML
     doctype::Nullable{AbstractString}
-    elems::Vector{XML}
+    elems::Vector
     Document() = new(Nullable(), [])
 end
 
@@ -18,7 +16,7 @@ function Document(l)
     stack = XML[doc]
     for e in l
         if isa(e, AbstractString)
-            push!(stack[end].elems, Text(e))
+            push!(stack[end].elems, e)
         elseif isa(e, Tag)
             t = Elem()
             t.name = e.name
@@ -58,10 +56,10 @@ function Base.show(io::IO, d::Document)
         println(io, "<?", get(d.doctype), "?>")
     end
     for e in d.elems
-        show(io, e)
+        print(io, e)
     end
 end
-Base.show(io::IO, d::Text) = print(io, d.data)
+
 function Base.show(io::IO, d::Elem)
     print(io, "<", d.name)
     for (k,v) in d.attrs
@@ -70,7 +68,7 @@ function Base.show(io::IO, d::Elem)
     print(io, ">")
 
     for e in d.elems
-        show(io, e)
+        print(io, e)
     end
     print(io, "</", d.name, ">")
 end

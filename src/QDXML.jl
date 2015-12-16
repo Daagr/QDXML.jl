@@ -1,3 +1,10 @@
+#TODO:
+# docs
+# readme
+# tests
+# parse_url
+# XML(?)
+
 module QDXML
 
 using ParserCombinator
