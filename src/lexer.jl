@@ -2,6 +2,7 @@ type Attr
     name::AbstractString
     value::AbstractString
 end
+Attr(name) = Attr(name, "")
 
 type Tag
     t::Int
@@ -14,7 +15,10 @@ spc = Drop(Star(Space()))
 
 
 doctype = E"<?" + p"[^?]*" + E"?>" |> x->Tag(0, x)
-attr = p"[^ =<>/?]+" + E"=" + p"[^ =<>/?]+" > Attr
+attrnq = p"[^ =<>/?]+" + E"=" + p"[^ =<>/?]+"
+attrq = p"[^ =<>/?]+" + E"=" + p"\"[^\"]*\""
+attre =  p"[^ =<>/?]+" + E" "
+attr = attrnq | attrq | attre > Attr
 tag = E"<" + p"[^?>/ ]*" + spc + Star(attr + spc) + E">" + spc |> x->Tag(1, x)
 endtag = E"</" + spc + p"[^?>/ ]*" + spc + E">" + spc |> x->Tag(2, x)
 stag = E"<" + p"[^?>/ ]*" + spc + Star(attr + spc) + E"/" + spc + E">" + spc |> x->Tag(3, x)

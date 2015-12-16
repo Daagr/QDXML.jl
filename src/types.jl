@@ -40,8 +40,11 @@ function Document(l)
                 unreachable
             end
             for i in e.attrs
-                # TODO: remove quotes
-                t.attrs[i.name] = i.value
+                if first(i.value) == last(i.value) == '"'
+                    t.attrs[i.name] = i.value[2:end-1]
+                else
+                    t.attrs[i.name] = i.value
+                end
             end
         else
             unreachable
@@ -63,7 +66,7 @@ end
 function Base.show(io::IO, d::Elem)
     print(io, "<", d.name)
     for (k,v) in d.attrs
-        print(io, " ", k, "=", v)
+        print(io, " ", k, "=\"", v, "\"")
     end
     print(io, ">")
 

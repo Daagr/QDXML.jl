@@ -2,12 +2,12 @@
 # docs
 # readme
 # tests
-# parse_url
-# XML(?)
 
 module QDXML
 
 using ParserCombinator
+
+export XML
 
 abstract XML
 
@@ -17,5 +17,7 @@ include("utils.jl")
 
 parse_string(s) = parse_one(s, all) |> Document
 parse_file(f) = readall(f) |> parse_string
+
+XML(s) = isa(s, AbstractString) && first(s) == '<' ? parse_string(s) : parse_file(s)
 
 end # module
