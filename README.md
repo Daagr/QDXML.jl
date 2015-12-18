@@ -1,5 +1,7 @@
 # QDXML
 
+[![Build Status](https://travis-ci.org/Daagr/QDXML.jl.svg?branch=master)](https://travis-ci.org/Daagr/QDXML.jl)
+
 Quick and Dirty XML parser. And by quick I mean quickly written; doesn't support many XML features like character references &epsilon;&cent;.
 
 ## Usage
@@ -20,3 +22,19 @@ end
 ```
 
 If `XML` thinks document is a file name, you can use `QDXML.parse_string(s)`.
+
+## Alternatives
+
+I haven't done any benchmarks so QDXML is probably really slow.
+
+#### [LightXML](https://github.com/JuliaLang/LightXML.jl)
+
+- Able to create XML trees
+- Supports more XML features
+- Not native Julia (wrapper of libxml2) and it shows (`free`)
+
+#### [PyCall](https://github.com/stevengj/PyCall.jl) + [bs4](http://www.crummy.com/software/BeautifulSoup/)
+
+- Hideously dependant on the environment (Python version, bs4 and xml library)
+- Really nice interface that I try to mimic
+
