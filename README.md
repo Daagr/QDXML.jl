@@ -25,13 +25,17 @@ If `XML` thinks document is a file name, you can use `QDXML.parse_string(s)`.
 
 ## Alternatives
 
-I haven't done any benchmarks so QDXML is probably really slow.
+I haven't done any benchmarks so QDXML is probably really slow. The alternatives also have better support for some XML features.
 
 #### [LightXML](https://github.com/JuliaLang/LightXML.jl)
 
 - Able to create XML trees
-- Supports more XML features
 - Not native Julia (wrapper of libxml2) and it shows (`free`)
+
+#### [LibExpat](https://github.com/amitmurthy/LibExpat.jl)
+
+- Really nice XPath queries
+- Wrapper for libexpat
 
 #### [PyCall](https://github.com/stevengj/PyCall.jl) + [bs4](http://www.crummy.com/software/BeautifulSoup/)
 
